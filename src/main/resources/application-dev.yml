@@ -1,0 +1,8 @@
+spring:
+  thymeleaf:
+    cache: false
+  data:
+    mongodb:
+      host: localhost
+      database: embeded_db
+      port: 27017

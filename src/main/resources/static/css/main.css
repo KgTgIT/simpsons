@@ -1,0 +1,25 @@
+body {
+    font-family: sans, serif;
+}
+
+h1 {
+	color: #0000FF;
+}
+
+h2 {
+	color: #FF0000;
+}
+
+footer {
+    position: fixed;
+    margin-top: 60px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.table>tbody>tr.active>td {
+    background: #123456;
+    color: #fff;
+}

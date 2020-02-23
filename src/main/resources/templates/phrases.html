@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title th:text="#{page.phrases.title}"></title>
+		<meta charset="utf-8" />
+		<div th:replace="fragments/header :: header-css" />
+	</head>
+	<body>
+		<div th:replace="fragments/header :: header" />
+
+		<div class="container">
+			<h2 th:text="#{page.phases.table.title}"></h2>
+			<div class="table-responsive">
+				<table class="table table-bordered table-dark" id="phrasesTable">
+					<thead class="thead-light">
+						<tr>
+							<th th:text="#{page.phases.table.header.message}"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="phrase : ${phrases}" class="clickable-row info">
+							<td id="phraseIdColumn" th:text="${phrase?.id}" hidden>id</td>
+							<td th:text="${phrase?.phrase}">phrase</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<form id="operation-form" class="form-horizontal">
+				<fieldset>
+					<div id="feedback"></div>
+					<div id="phaseDetails"></div>
+					<input type="hidden" id="characterId" th:value="${characterId}"/>
+					<input type="hidden" id="phraseId" th:value="${phraseId}"/>
+					<div class="control-group">
+						<label class="control-label" for="phrase" th:text="#{page.phrases.form.phrase}"></label>
+						<div class="controls">
+							<input type="text" id="phrase" name="phrase" class="form-control input-lg" th:placeholder="#{page.phrases.form.phrase}" autofocus="autofocus" required="required"/>
+						</div>
+					</div>
+					<br/>
+					<input type="submit" id="button-accept" class="btn btn-lg btn-primary" th:value="#{page.phrases.form.submit}"/>
+					<a id="deleteButton" onClick="deletePhrase()" class="btn btn-lg btn-primary disabled" role="button" th:text="#{page.phrases.form.delete}"></a>
+				</fieldset>
+			</form>
+		</div>
+
+		<div th:replace="fragments/footer :: footer" />
+	</body>
+</html>

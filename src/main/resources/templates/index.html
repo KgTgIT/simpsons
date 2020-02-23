@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:text="#{page.characters.title}"></title>
+        <meta charset="utf-8" />
+        <div th:replace="fragments/header :: header-css"/>
+    </head>
+    <body>
+    	<div th:replace="fragments/header :: header"/>
+
+		<div class="container">
+			<h2 th:text="#{page.characters.table.title}"></h2>
+			<div class="table-responsive" style="max-height: 800px; overflow-y: auto">
+				<table class="table table-bordered table-dark" id="charactersTable">
+					<thead class="thead-light">
+						<tr>
+							<th th:text="#{page.characters.table.header.transaction.firstName}"></th>
+							<th th:text="#{page.characters.table.header.transaction.lastName}"></th>
+							<th th:text="#{page.characters.table.header.transaction.age}"></th>
+							<th th:text="#{page.characters.table.header.transaction.picture}"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="character : ${characters}" class="clickable-row info">
+							<td id="character" th:text="${character?.id}" hidden>id</td>
+							<td th:text="${character?.fistName}">firstName</td>
+							<td th:text="${character?.lastName}">lastName</td>
+							<td th:text="${character?.age}">age</td>
+							<td style="width:250px; height:250px; text-align:center; vertical-align:middle">
+								<img th:src="${character?.pictureURL}" style="max-height:100%; max-width:100%"/>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<input type="hidden" id="characterId" th:value="${characterId}"/>
+			<h4 class="text-left" style="padding-top: 10px">
+				<a id="phrasesButton" onClick="openPhrases()" class="btn btn-primary btn-lg disabled" role="button" th:text="#{page.characters.button.phrases}"></a>
+			</h4>
+		</div>
+
+        <div th:replace="fragments/footer :: footer"/>
+    </body>
+</html>

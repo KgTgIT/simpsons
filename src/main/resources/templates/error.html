@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Error page</title>
+        <meta charset="utf-8" />
+        <div th:replace="fragments/header :: header-css"/>
+    </head>
+    <body>
+    	<div th:replace="fragments/header :: header"/>
+    	
+    	<div id="errorPageMessage" th:utext="${errorMessage}">Error java.lang.NullPointerException</div>
+    	
+        <div th:replace="fragments/footer :: footer"/>
+    </body>
+</html>

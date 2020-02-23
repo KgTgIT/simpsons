@@ -1,0 +1,38 @@
+server:
+  port: 8083
+
+logging:
+  config: classpath:configuration/logback-spring.xml
+  file:
+    name: log/simpsons.log
+  level:
+    root: info
+    org.springframework.web: INFO
+    springfox.documentation.spring.web: ERROR
+
+spring:
+  main:
+    banner-mode: off
+  messages:
+    basename: i18n/messages
+  thymeleaf:
+    cache: true
+  devtools:
+    add-properties: false
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: simpsons
+      password: simpsons
+      username: simpsons
+      authentication-database: admin
+      uri: mongodb://simpsons:simpsons@localhost:27017/simpsons
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

@@ -1,0 +1,54 @@
+version: '3.7'
+
+services:
+  mongo:
+    build:
+      context: ./mongo
+    container_name: simpsons-mongo
+    image: it.kgtg/simpsons-mongo:4.2.3
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME_FILE=/run/secrets/mongo_user_secret
+      - MONGO_INITDB_ROOT_PASSWORD_FILE=/run/secrets/mongo_pass_secret
+      - MONGO_INITDB_DATABASE=simpsons
+    volumes:
+      - db_data:/data/db
+    secrets:
+      - mongo_user_secret
+      - mongo_pass_secret
+    ports:
+      - "27017:27017"
+    networks:
+      - simpsons-network
+
+  app:
+    build:
+      context: ./app
+    container_name: simpsons-app
+    image: it.kgtg/simpsons-app:1.0.0
+    restart: always
+    volumes:
+      - ./logs/app:/log
+      - ./app/configuration:/configuration
+      - tomcat_data:/tmp
+    ports:
+      - "8083:8083"
+      - "5005:5005"
+    networks:
+      - simpsons-network
+    depends_on:
+      - mongo
+
+networks:
+  simpsons-network:
+    driver: bridge
+
+volumes:
+  db_data:
+  tomcat_data:
+
+secrets:
+  mongo_user_secret:
+    file: ./mongo/secrets/mongo_user_secret.txt
+  mongo_pass_secret:
+    file: ./mongo/secrets/mongo_pass_secret.txt

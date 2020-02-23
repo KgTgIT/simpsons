@@ -1,0 +1,54 @@
+<html xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${lang}">
+	<head>
+		<div th:fragment="header-css">
+			<link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+			<link rel="stylesheet" th:href="@{/css/main.css}" href="../static/css/main.css" />
+		</div>
+		<title></title>
+	</head>
+	<body>
+		<div th:fragment="header">
+			<nav class="navbar navbar-inverse">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<a class="navbar-brand" th:href="@{/}" th:text="#{home}"><i class="icon-home icon-white"></i></a>
+					</div>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="nav-item dropdown">
+								<a class="nav dropdown-toggle" id="locales" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<span th:text="#{header.locales.label}"></span>
+									<span th:switch="__${#locale.language}__">
+										<span th:case="en" th:text="#{header.locales.english}"></span>
+										<span th:case="pl" th:text="#{header.locales.polish}"></span>
+										<span th:case="*" th:text="#{header.locales.english}"></span>
+									</span>
+								</a>
+							<ul class="dropdown-menu" aria-labelledby="locales">
+								<li>
+									<a class="dropdown-item" th:href="@{?lang=en}" th:text="#{header.locales.english}"></a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a class="dropdown-item" th:href="@{?lang=pl}" th:text="#{header.locales.polish}"></a>
+								</li>
+							</ul></li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<span th:text="#{header.help}"></span>
+								<b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="mailto:kgtg.it@outlook.com">
+										<i class="icon-envelope"></i>
+										<span th:text="#{header.contact.support}"></span>
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</body>
+</html>
